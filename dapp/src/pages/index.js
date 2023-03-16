@@ -318,8 +318,7 @@ export default function Home() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
-      connectWallet();
-      getAmounts();
+      connectWallet().then(() => getAmounts());
     }
   }, [walletConnected]);
 
