@@ -318,12 +318,17 @@ export default function Home() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
+
+      connectWallet().then(() => getAmounts()).catch(err => alert(err.message))
+    }
+    else {
       web3ModalRef.current.connect().then((provider) => {
         provider.on("accountsChanged", (accounts) => {
+          setLoading(true)
           getAmounts()
+          setLoading(false)
         });
       })
-      connectWallet().then(() => getAmounts());
     }
   }, [walletConnected]);
 
