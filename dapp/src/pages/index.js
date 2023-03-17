@@ -318,9 +318,15 @@ export default function Home() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
+      web3ModalRef.current.connect().then((provider) => {
+        provider.on("accountsChanged", (accounts) => {
+          getAmounts()
+        });
+      })
       connectWallet().then(() => getAmounts());
     }
   }, [walletConnected]);
+
 
   /*
       renderButton: Returns a button based on the state of the dapp
